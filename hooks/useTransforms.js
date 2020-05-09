@@ -3,17 +3,27 @@ import { useCloudinary } from 'use-cloudinary';
 export default function useTransforms() {
   const { cloudinaryCore } = useCloudinary();
 
-  const addTextLayer = ({ border, fontFamily, fontSize, text, gravity, x, y }) => {
+  const addTextLayer = ({
+    fontFamily,
+    fontSize,
+    text,
+    gravity,
+    x,
+    y,
+    lineSpacing,
+    fontWeight
+  }) => {
     return [
       {
-        border: border || null
-      },
-      {
-
-        overlay: new cloudinaryCore.TextLayer().fontFamily(fontFamily || "Times").fontSize(fontSize || 32).text(text || ''),
+        overlay: new cloudinaryCore.TextLayer()
+          .fontFamily(fontFamily || "Times")
+          .fontSize(fontSize || 32)
+          .text(text || '')
+          .fontWeight(fontWeight || "semibold")
+          .lineSpacing(lineSpacing || -10),
         gravity: gravity || 'center',
-        x: x || null,
-        x: y || null
+        x: x || 0,
+        y: y || 0
       }
     ]
   }
@@ -25,8 +35,8 @@ export default function useTransforms() {
       {
         overlay: new cloudinaryCore.TextLayer().fontFamily(text.fontFamily || "Times").fontSize(text.fontSize || 32).text(text.text || ''),
         gravity: text.gravity || 'center',
-        x: text.x || null,
-        y: text.y || null
+        x: text.x || 0,
+        y: text.y || 0
       },
       // generate subtext
       {

@@ -21,22 +21,25 @@ export default function Templates() {
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>{error.message}</p>;
   return (
-    <Flex justifyContent="space-around">
+    <Flex justifyContent="space-around" direction="column">
       {data && data.resources.map(i => {
         return (
-          <Flex alignItems="center" direction="column">
-            <TemplateImage publicId={i.public_id} transforms={{ height: 0.2, crop: 'scale' }} />
-            <h3>{i.public_id}</h3>
-            Width: {i.width} --
-            Height: {i.height}
-            <Button onClick={() => setTemplate(i.public_id)}>Customize Template</Button>
-            {
-              template === i.public_id && <img src={customizeTemplate(template, addTextLayer({
-                text: "Just a little something",
-                fontSize: 64,
-                border: "3px_solid_black"
-              }))} />
-            }
+          <Flex alignItems="flex-start" direction="column">
+            <Flex w="100%" justifyContent="space-between">
+              <Flex direction="column" mb={8}>
+                <TemplateImage publicId={i.public_id} transforms={{ height: 0.2, crop: 'scale' }} />
+                <h3>{i.public_id}</h3>
+                Width: {i.width} -- Height: {i.height}
+                <Button onClick={() => setTemplate(i.public_id)}>Customize Template</Button>
+              </Flex>
+              {
+                template === i.public_id && <img src={customizeTemplate(template, addTextLayer({
+                  text: "Just a little something",
+                  fontSize: 64,
+                  border: "3px_solid_black"
+                }))} />
+              }
+            </Flex>
           </Flex>
         )
       })}
