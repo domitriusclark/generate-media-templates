@@ -1,4 +1,4 @@
-Utilizing [use-cloudinary]() this project aims to show you a few really cool things:
+Utilizing [use-cloudinary](https://github.com/domitriusclark/use-cloudinary), this project aims to show you a few really cool things:
 
 - Different use cases for Cloudinary and ways to implement them in the client 
 - Generate social media templates to style for your branding
