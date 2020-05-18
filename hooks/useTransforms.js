@@ -1,29 +1,37 @@
 import { useCloudinary } from 'use-cloudinary';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function useTransforms() {
   const { cloudinaryCore } = useCloudinary();
 
   const addTextLayer = ({
-    fontFamily,
-    fontSize,
     text,
+    font,
+    fontSize,
+    lineSpacing,
+    fontWeight,
+    width,
     gravity,
     x,
     y,
-    lineSpacing,
-    fontWeight
+    crop,
+    color
   }) => {
     return [
       {
+        id: uuidv4(),
         overlay: new cloudinaryCore.TextLayer()
-          .fontFamily(fontFamily || "Times")
-          .fontSize(fontSize || 32)
-          .text(text || '')
-          .fontWeight(fontWeight || "semibold")
-          .lineSpacing(lineSpacing || -10),
-        gravity: gravity || 'center',
-        x: x || 0,
-        y: y || 0
+          .fontFamily(font)
+          .fontSize(fontSize)
+          .text(text)
+          .fontWeight(fontWeight)
+          .lineSpacing(lineSpacing),
+        gravity,
+        width,
+        x,
+        y,
+        crop,
+        color
       }
     ]
   }
