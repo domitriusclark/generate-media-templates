@@ -24,11 +24,13 @@ export default function useImageReducer() {
   const updateTextLayer = (state, action) => {
     const layer = state.transforms.layers.find(tf => tf.id === action.updatedOverlay.id)
 
-    console.log(layer)
+    const updatedLayerIndex = state.transforms.layers.findIndex(obj => obj.id === action.updatedOverlay.id);
+
+    const newLayers = state.transforms.layers.slice()
 
     const options = { ...layer.overlay.options }
 
-    const baseLayerOps = layer.overlay ? omit(layer, "overlay") : {}
+    const baseLayerOps = omit(layer, "overlay")
 
     const cleanLayer = {
       ...baseLayerOps,
@@ -36,24 +38,17 @@ export default function useImageReducer() {
       [action.updatedOverlay.transform]: action.updatedOverlay.value
     }
 
-    const removedLayerArr = state.transforms.layers.filter(tf => {
-      return tf.id !== action.updatedOverlay.id
-    })
-
-    console.log(removedLayerArr);
+    newLayers[updatedLayerIndex] = {
+      ...addTextLayer({
+        ...cleanLayer
+      })
+    }
 
     return {
       ...state,
       transforms: {
         ...state.transforms,
-        layers: [
-          ...removedLayerArr,
-          {
-            ...addTextLayer({
-              ...omit(cleanLayer, 'id')
-            })
-          }
-        ]
+        layers: newLayers
       }
     }
   }

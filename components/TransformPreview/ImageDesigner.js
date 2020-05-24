@@ -44,7 +44,6 @@ export default function ImageDesigner() {
     fontSize: 32,
     lineSpacing: -10,
     fontWeight: "semibold",
-    width: 200,
     gravity: "center",
     x: 0,
     y: 0,
@@ -57,6 +56,8 @@ export default function ImageDesigner() {
   const updateTextOverlay = (updatedOverlay) => {
     dispatch({ type: UPDATE_TEXT_OVERLAY, updatedOverlay })
   }
+
+  console.log(store.transforms.layers)
 
   return (
     <Flex mt={8} direction="column" >

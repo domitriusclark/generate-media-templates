@@ -5,6 +5,7 @@ export default function useTransforms() {
   const { cloudinaryCore } = useCloudinary();
 
   const addTextLayer = ({
+    id,
     text,
     fontFamily,
     fontSize,
@@ -18,7 +19,7 @@ export default function useTransforms() {
     color
   }) => {
     return {
-      id: uuidv4(),
+      id: id || uuidv4(),
       overlay: new cloudinaryCore.TextLayer()
         .fontFamily(fontFamily)
         .fontSize(fontSize)

@@ -22,7 +22,7 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
   const debouncedInputs = useDebounce(inputs, 1000);
 
   React.useEffect(() => {
-    updateTextOverlay({ ...inputs, id: textOverlay.id, })
+    updateTextOverlay({ ...inputs, id: textOverlay.id })
   }, [debouncedInputs])
 
   return (
@@ -33,7 +33,7 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
           Text
         <Input defaultValue={textOverlay.overlay.options.text} onChange={e => {
             e.persist();
-            setInputs({ value: e.target.value, transform: "text" })
+            setInputs({ value: e.target.value, transform: "text", id: textOverlay.id })
           }} />
         </label>
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.x} updater={updateTextOverlay} transform="x" />
@@ -43,7 +43,6 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
       </Flex>
 
       <Flex m={4} justifyContent="space-evenly">
-        { /* FONT STYLE */}
         <label>
           Color
         <input type="color" />
@@ -52,7 +51,7 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
           Font
         <Input w={32} defaultValue={textOverlay.overlay.options.fontFamily} onChange={e => {
             e.persist();
-            setInputs({ value: e.target.value, transform: "fontFamily" })
+            setInputs({ value: e.target.value, transform: "fontFamily", id: textOverlay.id })
           }} />
         </label>
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.overlay.options.fontSize} updater={updateTextOverlay} value={textOverlay.fontSize} transform="fontSize" />
@@ -61,7 +60,7 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
           Weight
         <Input w={32} defaultValue={textOverlay.overlay.options.fontWeight} transform="fontWeight" onChange={e => {
             e.persist();
-            setInputs({ value: e.target.value, transform: "fontWeight" })
+            setInputs({ value: e.target.value, transform: "fontWeight", id: textOverlay.id })
           }} />
         </label>
       </Flex>
