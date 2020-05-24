@@ -22,6 +22,8 @@ import {
 import OverlayTextForm from './OverlayTextForm';
 import ImageForm from './ImageForm';
 import ImageConfig from './ImageConfig';
+import Templates from '../Templates';
+import TemplateSelect from '../UploadTemplate';
 
 export default function ImageDesigner() {
   const [url, setUrl] = React.useState();
@@ -57,15 +59,17 @@ export default function ImageDesigner() {
     dispatch({ type: UPDATE_TEXT_OVERLAY, updatedOverlay })
   }
 
-  console.log(store.transforms.layers)
-
   return (
     <Flex mt={8} direction="column" >
+      <Templates updatePublicId={updatePublicId} updateTransform={updateTransform} />
       <ImageConfig store={store} updateCloudName={updateCloudName} updatePublicId={updatePublicId} />
-      <Box alignSelf="center">
+      <Box alignSelf="center" border="1px solid black">
         <img src={url} alt="Template to edit" />
       </Box>
-      <Text mt={8} as="h3" alignSelf="center">{url}</Text>
+      <Box w="60%" alignSelf="center">
+        <Text textOverflow="ellipsis" whiteSpace="nowrap" overflow="hidden" mt={8}>{url}</Text>
+      </Box>
+
       <ImageForm store={store} updateTransform={updateTransform} />
       {store.transforms.layers && store.transforms.layers.map((textOverlay) => (
         <OverlayTextForm textOverlay={textOverlay} updateTextOverlay={updateTextOverlay} />
