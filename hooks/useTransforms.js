@@ -6,7 +6,7 @@ export default function useTransforms() {
 
   const addTextLayer = ({
     text,
-    font,
+    fontFamily,
     fontSize,
     lineSpacing,
     fontWeight,
@@ -17,23 +17,21 @@ export default function useTransforms() {
     crop,
     color
   }) => {
-    return [
-      {
-        id: uuidv4(),
-        overlay: new cloudinaryCore.TextLayer()
-          .fontFamily(font)
-          .fontSize(fontSize)
-          .text(text)
-          .fontWeight(fontWeight)
-          .lineSpacing(lineSpacing),
-        gravity,
-        width,
-        x,
-        y,
-        crop,
-        color
-      }
-    ]
+    return {
+      id: uuidv4(),
+      overlay: new cloudinaryCore.TextLayer()
+        .fontFamily(fontFamily)
+        .fontSize(fontSize)
+        .text(text)
+        .fontWeight(fontWeight)
+        .lineSpacing(lineSpacing),
+      gravity,
+      width,
+      x,
+      y,
+      crop,
+      color
+    }
   }
 
   const addTextTagsLogo = ({ text, tags, logo, logoGravity }) => {

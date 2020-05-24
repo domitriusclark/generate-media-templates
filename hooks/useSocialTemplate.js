@@ -92,8 +92,10 @@ export default function useSocialTemplate({ endpoint = '', cloudName = '' } = {}
   }
 
   function customizeTemplate(type, transform_options) {
+    const transformation = [{ ...transform_options }]
+    const newTransformLayer = transform_options.layers ? transform_options.layers.reduce((acc, element) => acc.concat(element), transformation) : transformation;
     return cld.url(`${type}`, {
-      transformation: transform_options
+      transformation: newTransformLayer
     })
   }
 
