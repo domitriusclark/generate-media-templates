@@ -1,15 +1,15 @@
 import React from 'react';
 
-import useSocialTemplate from '../../hooks/useSocialTemplate';
-import useTransforms from '../../hooks/useTransforms';
+import useSocialTemplate from '../hooks/useSocialTemplate';
+import useTransforms from '../hooks/useTransforms';
+
 import useImageReducer, {
   UPDATE_TRANSFORM_OPTIONS,
-  UPDATE_IMAGE_OPTIONS,
   ADD_TEXT_OVERLAY,
   UPDATE_PUBLIC_ID,
   UPDATE_CLOUD_NAME,
   UPDATE_TEXT_OVERLAY
-} from '../../hooks/useImageReducer';
+} from '../hooks/useImageReducer';
 
 import {
   Flex,
@@ -22,8 +22,8 @@ import {
 import OverlayTextForm from './OverlayTextForm';
 import ImageForm from './ImageForm';
 import ImageConfig from './ImageConfig';
-import Templates from '../Templates';
-import TemplateSelect from '../UploadTemplate';
+import Templates from './Templates';
+import TemplateSelect from './TemplateSelect';
 
 export default function ImageDesigner() {
   const [url, setUrl] = React.useState();
@@ -39,7 +39,6 @@ export default function ImageDesigner() {
   const updateCloudName = (cloudName) => dispatch({ type: UPDATE_CLOUD_NAME, cloudName });
   const updatePublicId = (publicId) => dispatch({ type: UPDATE_PUBLIC_ID, publicId });
   const updateTransform = (transform) => dispatch({ type: UPDATE_TRANSFORM_OPTIONS, transform });
-  const updateImageOptions = (newImage) => dispatch({ type: UPDATE_IMAGE_OPTIONS, newImage })
   const addTextOverlay = (options = {
     text: "Your text here",
     fontFamily: "Times",
@@ -61,6 +60,7 @@ export default function ImageDesigner() {
 
   return (
     <Flex mt={8} direction="column" >
+      <TemplateSelect />
       <Templates updatePublicId={updatePublicId} updateTransform={updateTransform} />
       <ImageConfig store={store} updateCloudName={updateCloudName} updatePublicId={updatePublicId} />
       <Box alignSelf="center" border="1px solid black">

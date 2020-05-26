@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useDebounce from '../../hooks/useDebounce';
+import useDebounce from '../hooks/useDebounce';
 
 import {
   NumberInput,
@@ -13,8 +13,10 @@ import {
 export default function TransformNumberInput({ id = undefined, defaultValue, updater, transform }) {
   const [input, setInput] = React.useState(defaultValue)
 
+  // We must debounce our inputs to allow our users time to make changes to our inputs
   const debounced = useDebounce(input, 1000);
 
+  // We want to prevent updater on the first mount, so we don't apply default transforms twice
   const isFirstRun = React.useRef(true);
   React.useEffect(() => {
     if (isFirstRun.current) {

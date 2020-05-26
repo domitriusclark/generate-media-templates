@@ -1,9 +1,6 @@
 import React from 'react';
-import useSocialTemplate from '../hooks/useSocialTemplate';
-import useTransforms from '../hooks/useTransforms';
 import { useSearch } from 'use-cloudinary';
-
-import TemplateImage from '../components/TemplateImage';
+import TemplateImage from './TemplateImage';
 import { Flex, Button } from '@chakra-ui/core';
 
 export default function Templates({ updatePublicId, updateTransform }) {
@@ -17,6 +14,7 @@ export default function Templates({ updatePublicId, updateTransform }) {
 
   if (status === "loading") return <p>Loading...</p>;
   if (status === "error") return <p>{error.message}</p>;
+
   return (
     <Flex justifyContent="space-around">
       {data && data.resources.map(i => {

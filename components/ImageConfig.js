@@ -1,5 +1,5 @@
 import React from 'react';
-import useDebounce from '../../hooks/useDebounce';
+import useDebounce from '../hooks/useDebounce';
 
 import {
   Flex,
@@ -30,7 +30,7 @@ export default function ImageConfig({ store, updateCloudName, updatePublicId }) 
           setInputs(prev => ({ ...prev, cloudName: e.target.value }))
         }}
         type="text"
-        defaultValue={inputs.cloudName}
+        defaultValue={store.cloudName}
       />
       <Input
         onChange={e => {
@@ -38,7 +38,7 @@ export default function ImageConfig({ store, updateCloudName, updatePublicId }) 
           setInputs(prev => ({ ...prev, publicId: e.target.value }))
         }}
         type="text"
-        defaultValue={inputs.publicId}
+        defaultValue={store.publicId}
       />
     </Flex>
   )

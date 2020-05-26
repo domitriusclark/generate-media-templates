@@ -1,22 +1,63 @@
 import React from 'react';
 
-import useDebounce from '../../hooks/useDebounce';
+import useDebounce from '../hooks/useDebounce';
 
 import {
   TRANSFORM_GRAVITY,
   TRANSFORM_CROP
-} from '../../utils';
+} from '../utils';
 
 import {
   Flex,
   Input,
-  Text
+  Text,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb
 } from "@chakra-ui/core"
 
 import TransformNumberInput from './TransformNumberInput'
 import TransformOptionSelect from './TransformOptionSelect';
 
+function SliderInput({ id, defaultValue, updater, transform }) {
+  const [input, setInput] = React.useState(defaultValue)
+
+  const debounced = useDebounce(input, 1000);
+
+  const isFirstRun = React.useRef(true);
+  React.useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+
+    if (id) {
+      updater({ transform, value: input, id })
+    } else {
+      updater({ transform, value: input })
+    }
+  }, [debounced])
+
+  return (
+    <Flex>
+      <Slider flex="1" value={defaultValue} onChange={e => setInput(e.target.value)}>
+        <SliderTrack />
+        <SliderFilledTrack />
+        <SliderThumb
+          fontSize="sm"
+          width="32px"
+          height="20px"
+          children={defaultValue}
+        />
+      </Slider>
+
+    </Flex>
+  );
+}
+
 export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
+
   const [inputs, setInputs] = React.useState();
 
   const debouncedInputs = useDebounce(inputs, 1000);
@@ -30,11 +71,8 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
       <Text mt={6} ml={6} as="h2">Text Overlay</Text>
       <Flex m={4} justifyContent="space-evenly">
         <label>
-          Text
-        <Input defaultValue={textOverlay.overlay.options.text} onChange={e => {
-            e.persist();
-            setInputs({ value: e.target.value, transform: "text", id: textOverlay.id })
-          }} />
+          text
+        <Input defaultValue={textOverlay.overlay.options.text} onChange={e => setInputs({ value: e.target.value, transform: "text", id: textOverlay.id })} />
         </label>
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.x} updater={updateTextOverlay} transform="x" />
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.y} updater={updateTextOverlay} transform="y" />
@@ -44,24 +82,18 @@ export default function OverlayTextForm({ textOverlay, updateTextOverlay }) {
 
       <Flex m={4} justifyContent="space-evenly">
         <label>
-          Color
-        <input type="color" />
+          color
+        <input type="color" defaultValue={textOverlay.color} onChange={e => setInputs({ value: e.target.value, transform: "color", id: textOverlay.id })} />
         </label>
         <label>
-          Font
-        <Input w={32} defaultValue={textOverlay.overlay.options.fontFamily} onChange={e => {
-            e.persist();
-            setInputs({ value: e.target.value, transform: "fontFamily", id: textOverlay.id })
-          }} />
+          font
+        <Input w={32} defaultValue={textOverlay.overlay.options.fontFamily} onChange={e => setInputs({ value: e.target.value, transform: "fontFamily", id: textOverlay.id })} />
         </label>
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.overlay.options.fontSize} updater={updateTextOverlay} value={textOverlay.fontSize} transform="fontSize" />
         <TransformNumberInput id={textOverlay.id} defaultValue={textOverlay.overlay.options.lineSpacing} updater={updateTextOverlay} value={textOverlay.lineSpacing} transform="lineSpacing" />`
         <label>
-          Weight
-        <Input w={32} defaultValue={textOverlay.overlay.options.fontWeight} transform="fontWeight" onChange={e => {
-            e.persist();
-            setInputs({ value: e.target.value, transform: "fontWeight", id: textOverlay.id })
-          }} />
+          weight
+        <Input w={32} defaultValue={textOverlay.overlay.options.fontWeight} transform="fontWeight" onChange={e => setInputs({ value: e.target.value, transform: "fontWeight", id: textOverlay.id })} />
         </label>
       </Flex>
 

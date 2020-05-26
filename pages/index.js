@@ -1,13 +1,5 @@
-import UploadTemplate from '../components/UploadTemplate'
-import Templates from '../components/Templates';
-import TransformPreview from '../components/TransformPreview/TransformPreview';
+import TransformPreview from '../components/TransformPreview';
 
 export default function Index() {
-  return (
-    <div>
-      <TransformPreview />
-      {/* <UploadTemplate />
-      <Templates /> */}
-    </div>
-  )
+  return <TransformPreview />
 }

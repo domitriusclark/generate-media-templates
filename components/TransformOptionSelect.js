@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useDebounce from '../../hooks/useDebounce';
+import useDebounce from '../hooks/useDebounce';
 
 import {
   Select,

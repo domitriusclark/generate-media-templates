@@ -6,7 +6,7 @@ export default function TemplateSelect() {
   const { createTemplate } = useSocialTemplate({ endpoint: '/api/upload' })
   const [item, setItem] = React.useState();
   return (
-    <Flex>
+    <Flex mb={10} w="50%" alignSelf="center">
       <Select value={item} onChange={(e) => setItem(e.target.value)} placeholder="Select template to generate">
         <option value="opengraph">Open Graph</option>
         <option value="twitter-banner">Twitter Banner</option>
@@ -15,7 +15,7 @@ export default function TemplateSelect() {
         <option value="instagram-story">Instagram Story</option>
       </Select>
       <Button onClick={() => createTemplate(item)}>Generate</Button>
-    </Flex>
+    </Flex >
 
   )
 }

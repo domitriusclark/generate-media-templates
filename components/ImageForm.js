@@ -4,7 +4,7 @@ import {
   TRANSFORM_CROP,
   TRANSFORM_QUALITY,
   TRANSFORM_FORMAT
-} from '../../utils';
+} from '../utils';
 
 import {
   Flex,
@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/core';
 
 import TransformNumberInput from './TransformNumberInput'
-import TransformOptionSelect from './TransformOptionSelect';
+import TransformOptionSelect from './TransformOptionSelect'
 
 
 export default function ImageForm({ store, updateTransform }) {

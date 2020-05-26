@@ -8,7 +8,7 @@ import {
   TRANSFORM_GRAVITY,
   TRANSFORM_POSITION_X,
   TRANSFORM_POSITION_Y
-} from '../../utils';
+} from '../utils';
 
 export default function OverlayImageForm() {
 
