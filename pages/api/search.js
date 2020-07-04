@@ -8,9 +8,13 @@ cloudinary.config({
 
 export default async function (req, res) {
   const body = JSON.parse(req.body);
+
+  console.log(body)
+
   const value = await cloudinary.search
     .expression(body.expression)
-    .execute().then(result => result);
+    .execute()
+    .then(result => result);
 
   return res.status(200).send(JSON.stringify(value))
 }
